@@ -1,4 +1,4 @@
-import {Component} from '@angular/core';
+import {Component, EventEmitter, Output} from '@angular/core';
 
 @Component({
   selector: 'app-post-create',
@@ -8,14 +8,20 @@ import {Component} from '@angular/core';
 
 export class PostCreateComponent {
 
-  newPost = '';
-  Test = 'Test Post...';
-  enteredValue: '';
+  enteredTitle: '';
+  enteredContent = '';
 
-  onAddPost(postInput: HTMLTextAreaElement) {
-    this.newPost = this.enteredValue;
-    // this.newPost = postInput.value;
-    console.log(postInput.value);
-    console.dir(postInput);
+  @Output() postCreated = new EventEmitter(); // Use emitter to emit the Post Created
+
+  onAddPost() {
+    const post = {
+      title: this.enteredTitle,
+      content: this.enteredContent
+    };
+
+    /* Emit the post created for other observer to receive.
+    *   'post' argument will be '$event' pass along for the observer.
+    * */
+    this.postCreated.emit(post);
   }
 }
