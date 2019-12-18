@@ -1,5 +1,6 @@
 import {Component, EventEmitter, Output} from '@angular/core';
 import {IPost} from '../post.model';
+import {NgForm} from '@angular/forms';
 
 @Component({
   selector: 'app-post-create',
@@ -14,10 +15,13 @@ export class PostCreateComponent {
 
   @Output() postCreated = new EventEmitter<IPost>(); // Use emitter to emit <IPost> the Post Created
 
-  onAddPost() {
+  onAddPost(form: NgForm) {
+    if (form.invalid) {
+      return;
+    }
     const post: IPost = {
-      title: this.enteredTitle,
-      content: this.enteredContent
+      title: form.value.title,
+      content: form.value.content
     };
 
     /* Emit the post created for other observer to receive.
