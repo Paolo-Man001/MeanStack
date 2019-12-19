@@ -13,11 +13,6 @@ export class PostCreateComponent {
   enteredTitle: '';
   enteredContent = '';
 
-  /*
-   // injecting postsService eliminate the need of EventEmitter.
-   @Output() postCreated = new EventEmitter<IPost>(); // Use emitter to emit <IPost> the Post Created
-  */
-
   constructor(public postsService: PostsService) {
   }
 
@@ -27,14 +22,6 @@ export class PostCreateComponent {
     }
     this.postsService.addPost(form.value.title, form.value.content);
 
-    /*const post: IPost = {
-      title: form.value.title,
-      content: form.value.content
-    };*/
-
-    /* Emit the post created for other observer to receive.
-    *   'post' argument will be '$event' pass along for the observer.
-    * // this.postCreated.emit(post);
-    * */
+    form.resetForm(); // Resets the input fields of the form after saving.
   }
 }
