@@ -1,5 +1,10 @@
 <app-header></app-header>
 <main>
+  <!--
+    '(postCreated)' is the EventEmitter from app-post-create.
+    'onPostAdded' is the method inside - app-component - that
+    receives and extracts the emitted data.
+   -->
   <app-post-create (postCreated)="onPostAdded($event)"></app-post-create>
   <app-post-list [posts]="storedPosts"></app-post-list>
 </main>
