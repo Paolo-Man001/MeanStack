@@ -9,9 +9,8 @@ import {PostsService} from '../posts.service';
 })
 
 export class PostCreateComponent {
-
-  enteredTitle: '';
-  enteredContent = '';
+  // enteredTitle: '';
+  // enteredContent = '';
 
   constructor(public postsService: PostsService) {
   }

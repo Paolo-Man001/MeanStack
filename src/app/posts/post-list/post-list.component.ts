@@ -25,8 +25,8 @@ export class PostListComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit() {
-    this.posts = this.postsService.getPosts();
-
+    // this.posts = this.postsService.getPosts();
+    this.postsService.getPosts(); // ng 'httpClient' handles the return value
     // subscribe to observable's changes and update what needs to be displayed.
     this.postsService.getPostUpdateListener()
       .subscribe((posts: IPost[]) => {
