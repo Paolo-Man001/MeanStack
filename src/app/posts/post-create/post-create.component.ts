@@ -1,6 +1,6 @@
 import {Component, EventEmitter, Output} from '@angular/core';
-import {IPost} from '../post.model';
 import {NgForm} from '@angular/forms';
+import {PostsService} from '../posts.service';
 
 @Component({
   selector: 'app-post-create',
@@ -13,20 +13,28 @@ export class PostCreateComponent {
   enteredTitle: '';
   enteredContent = '';
 
-  @Output() postCreated = new EventEmitter<IPost>(); // Use emitter to emit <IPost> the Post Created
+  /*
+   // injecting postsService eliminate the need of EventEmitter.
+   @Output() postCreated = new EventEmitter<IPost>(); // Use emitter to emit <IPost> the Post Created
+  */
+
+  constructor(public postsService: PostsService) {
+  }
 
   onAddPost(form: NgForm) {
     if (form.invalid) {
       return;
     }
-    const post: IPost = {
+    this.postsService.addPost(form.value.title, form.value.content);
+
+    /*const post: IPost = {
       title: form.value.title,
       content: form.value.content
-    };
+    };*/
 
     /* Emit the post created for other observer to receive.
     *   'post' argument will be '$event' pass along for the observer.
+    * // this.postCreated.emit(post);
     * */
-    this.postCreated.emit(post);
   }
 }
